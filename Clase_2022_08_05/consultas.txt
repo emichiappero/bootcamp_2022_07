@@ -1,0 +1,64 @@
+- Inserción de datos
+- Consulta de los datos
+
+
+Operadores Matemáticos:
+
+$eq: igual que (equal)
+$ne: distinto de (not equal)
+$gt: mayor que (greater than)
+$gte: mayor o igual que (greater than or equal)
+$lt: menor que (lower than)
+$lte: menor o igual que (lower than or equal)
+
+$exists: existe o no un campo (ej: { nombre: {$exists: true} })
+
+
+CONSULTAS son en formato JSON ----> { key: value }
+
+EJEMPLO
+
+//Buscar entre todos los documentos de mi colección, que nombre sea igual a María 
+{ nombre: "María" } 
+{ nombre: { $eq: "María" } }
+
+//Buscar los documentos con el dato edad mayor o igual que 30
+{ edad: { $gte: 30 } }
+
+//Buscar los documentos con el dato cantidad menor que 10
+{ cantidad: { $lt: 10 } }
+
+//Buscar los documentos con el dato apellido distinto de Lopez
+{ apellido: { $ne: "Lopez" } }
+
+
+OPERADORES LÓGICOS
+
+AND (Y)
+
+//Busca todos los documentos que cumplen con las condiciones Nombre = Juana Y edad > 45
+{ nombre: "Juana", edad: { $gt: 45 } }
+
+
+
+OR (Ó)
+
+//Busca todos los documentos que cumplen con al menos 1 de las 2 condiciones
+// Nombre sea Juana Ó edad > 45
+
+{ $or: [ { nombre: "Juana" }, { edad: { $gt: 45 } } ] }
+
+
+
+
+
+EJERCICIO:
+- Alquiler de automoviles/carros
+- Crear la colección correspondiente (sólo una)
+- Insertar al menos 5 documentos (con los datos necesarios)
+- CONSULTAS:
+  - Buscar documentos en donde la marca del auto/carro sea "Peugeot".
+  - Buscar documentos que el total (precio) sea mayor a 100000 ó que el cliente exista
+  - Buscar documentos que el año del Alquiler sea mayor a 2020
+  - Buscar documentos del cliente con apellido "De Pedrini" o que el auto sea modelo mayor a 2015
+  - Buscar documentos que el auto NO sea "Audi" y SI sea "Fiat" o "Chevrolet" o "Ford"

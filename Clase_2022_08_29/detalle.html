@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle</title>
+  </head>
+  <body>
+    <p id="_id"></p>
+    <h1 id="nombre"></h1>
+
+    <img id="imagen" />
+
+    <button>Comprar</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var url_actual = window.location.href;
+        // http://localhost:3000/producto/630d57b6ca4c9130f26622df
+        $.ajax({
+          url: url_actual,
+          method: "POST",
+          success: function (respuesta) {
+            $("#_id").append(respuesta._id);
+            $("#nombre").append(respuesta.nombre);
+            $("#imagen").attr("src", "imagenes/" + respuesta.url);
+          },
+        });
+
+        //Evento boton comprar
+        //AJAX (post)
+        //url /comprar
+        //method POST
+        //data { id_producto, cantidad, total }
+        //success
+      });
+    </script>
+  </body>
+</html>

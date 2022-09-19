@@ -1,0 +1,20 @@
+<h2>Listado de Tareas</h2>
+
+<table border="1">
+  <thead>
+    <td>ID</td>
+    <th>Título</th>
+    <th>Detalle</th>
+    <td>Fecha</td>
+    <td>Finalizada</td>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of todoServicio.documentos">
+      <td>{{ t._id }}</td>
+      <td>{{ t.titulo }}</td>
+      <td>{{ t.detalle }}</td>
+      <td>{{ t.fecha }}</td>
+      <td>{{ t.finalizada }}</td>
+    </tr>
+  </tbody>
+</table>

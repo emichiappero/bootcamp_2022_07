@@ -1,0 +1,41 @@
+<%- include('_header.ejs') %> <%- include('_navbar.ejs') %>
+
+<div class="container">
+  <% if(show_mensaje == true){ %>
+  <div class="mt-5">
+    <div class="alert alert-success text-center" role="alert">
+      Producto agregado correctamente al <a href="/carrito">carrito</a>.
+    </div>
+  </div>
+  <% } %>
+
+  <h1 class="mt-5 mb-3">Listado de productos</h1>
+
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <% for(var i = 0; i < productos.length; i++){ %>
+    <div class="col">
+      <div class="card" style="width: 18rem">
+        <img
+          src="../../<%= productos[i].carrusel[0] %>"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <span class="badge bg-info text-dark mb-3"
+            ><%= productos[i].categoria %></span
+          >
+          <h5 class="card-title"><%= productos[i].nombre %></h5>
+          <p class="card-text"><%= productos[i].descripcion %></p>
+          <a
+            href="/producto/<%= productos[i]._id %>"
+            class="btn btn-outline-primary btn-sm"
+            >Ver más</a
+          >
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('_footer.ejs') %>

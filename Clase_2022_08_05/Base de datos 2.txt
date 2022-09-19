@@ -1,0 +1,119 @@
+Base de datos
+Datos != información
+
+2 tipos de base de datos (SQL & NOSQL)
+
+SQL
+-----
+  - Si tiene estructura (tengo que definirla antes de guardar los datos)
+  - Almacena la información en TABLAS
+  - REGISTROS es la fila
+  - COLUMNAS son los campos (datos)
+
+
+NoSQL (MongoDB)
+-----
+  - no tiene estructura fija
+  - Almacena la información en COLECCIONES (formato JSON)
+  - DOCUMENTOS
+  - CAMPOS 
+
+   JSON ---> clave: valor (se llama Par Clave/Valor)
+
+
+
+
+- clientes
+
+{
+  _id: "0000001AAA",
+  nombre: "Juan",
+  apellido: "Perez",
+  direccion: "lalalal 123",
+  email: "juan@gmail.com",
+  tel: "+541323123213123"
+}
+
+
+- mascotas
+
+{
+  _id: "123123asdasdaas123",
+  nombre: "Pepe",
+  edad: 7,
+  tipo: "perro",
+  raza: "pitbull aleman",
+  grupo_sanguineo: "A+",
+  estado: "sano",
+  duenio: "0000001AAA"
+}
+
+- Historial_medico
+{
+  fecha: "15/07/2022",
+  procedimiento: "Se atendió al perro porque se había atrangantado con una pelota de tenis",
+  diangostico: "atratangamiento",
+  tratamiento: "tomar 4 gotitas diarias de XX medicamento",
+  medicamntos: {
+    nombre: "remedio X",
+    dosis: "4 veces por día"
+  },
+  proxima_consulta: "15/08/2022",
+  mascota: "123123asdasdaas123"
+}
+
+- Compras
+{
+  _id: "11111111",
+  fecha: "15/07/2022",
+  cliente: "0000001AAA",
+  detalle: [
+    { 
+      producto: "Shampoo para perros",
+      cantidad: 1,
+      precio: 1400
+    },
+    {
+      producto: "Comida Royal Canin",
+      cantidad: 2,
+      precio: 2000
+    }
+  ]
+   
+}
+
+-------
+
+CONSULTAS
+{
+  cliente: {
+    nombre: "Juan",
+    apellido: "Perez",
+    direccion: "lalalal 123",
+    email: "juan@gmail.com",
+    tel: "+541323123213123"
+  },
+  mascota: {
+    nombre: "Pepe",
+    edad: 7,
+    tipo: "perro",
+    raza: "pitbull aleman",
+    grupo_sanguineo: "A+",
+    estado: "sano",
+    duenio: "0000001AAA"
+  },
+  fecha: "15/07/2022",
+  procedimiento: "Se atendió al perro porque se había atrangantado con una pelota de tenis",
+  diangostico: "atratangamiento",
+  tratamiento: "tomar 4 gotitas diarias de XX medicamento",
+  medicamntos: {
+    nombre: "remedio X",
+    dosis: "4 veces por día"
+  },
+  proxima_consulta: "15/08/2022",
+  compra: {
+    producto: "Shampoo para perros",
+    cantidad: 1,
+    precio: 1400
+  }
+}

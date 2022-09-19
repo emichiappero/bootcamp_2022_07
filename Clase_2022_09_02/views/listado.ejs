@@ -1,0 +1,27 @@
+
+<%- include('cabecera.ejs') %>
+
+<h1>Listado de Tareas</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <td>Titulo</td>
+      <td>Detalle</td>
+      <td>Finalizada</td>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i=0; i<docs.length; i++ ){ %>
+      <tr>
+        <td><%= docs[i].titulo %></td>
+        <td><%= docs[i].detalle %></td>
+        <td><%= docs[i].finalizada %></td>
+        
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<%- include('footer.ejs') %>

@@ -1,0 +1,24 @@
+body {
+  background-color: mediumaquamarine;
+}
+
+/* Si es ID se utiliza el # */
+#contenedor1 {
+  border: 0.1em solid #ea0c0c;
+  padding-left: 50px;
+}
+
+#contendedor2 {
+  border: 0.5em dashed blue;
+}
+
+/* 
+Algunas propiedades
+
+- Color de texto: color
+- Color de fondo: background-color
+- Tamaño de fuente: font-size
+- Fuente: font-family
+- Borde: border (anchoDeLinea solid/dashed/dotted color)
+- 
+*/

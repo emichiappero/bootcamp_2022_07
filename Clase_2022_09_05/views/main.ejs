@@ -1,0 +1,101 @@
+<!--Aquí va header.ejs -->
+<%- include("header.ejs") %>
+
+<div class="principal">
+  <% if(show == 'show_form'){ %>
+  <h3>Insertar nueva tarea</h3>
+
+  <form action="/newTask" method="POST">
+    <input type="text" name="titulo" placeholder="Ingrese el título" />
+    <br />
+    <textarea
+      name="detalle"
+      cols="30"
+      rows="10"
+      placeholder="Ingrese el detalle de la Tarea"
+    ></textarea>
+    <br />
+    <input type="date" name="fecha" />
+    <br /><br />
+    <button type="submit">Guardar Tarea</button>
+  </form>
+
+  <% }else if(show == 'show_table'){ %>
+
+  <h3>Listado de Tareas</h3>
+
+  <table border="1">
+    <thead>
+      <th>Título</th>
+      <th>Fecha</th>
+      <th>Finalizada</th>
+      <th>Acciones</th>
+    </thead>
+    <tbody>
+      <% for(var i=0; i < docs.length; i++){ %>
+      <tr>
+        <td><%= docs[i].titulo %></td>
+        <td><%= docs[i].fecha %></td>
+        <td><%= (docs[i].finalizada == true)?'Finalizada':'Nueva' %></td>
+        <td>
+          <a href="/updateTask/<%= docs[i]._id %>">Modificar</a> |
+          <a href="/deleteTask/<%= docs[i]._id %>">Eliminar</a> |
+          <a href="/detailTask/<%= docs[i]._id %>">Ver</a>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <% }else{ %>
+  <h3>Detalle de la Tarea "<%= task._id %>"</h3>
+  <ul>
+    <li>
+      <strong>Título: </strong>
+      <%= task.titulo %>
+    </li>
+    <li>
+      <strong>Detall: </strong>
+      <%= task.detalle %>
+    </li>
+    <li>
+      <strong>Fecha: </strong>
+      <%= task.fecha %>
+    </li>
+    <li>
+      <strong>Finalizada: </strong>
+      <%= task.finalizada %>
+    </li>
+  </ul>
+  <hr />
+
+  <h4>Ejemplo de formulario para modificar</h4>
+
+  <form action="/updateTask" method="POST">
+    <input type="hidden" name="_id" value="<%= task._id %>" />
+    <input
+      type="text"
+      name="titulo"
+      placeholder="Ingrese el título"
+      value="<%= task.titulo %>"
+    />
+    <br />
+    <textarea
+      name="detalle"
+      cols="30"
+      rows="10"
+      placeholder="Ingrese el detalle de la Tarea"
+    >
+<%= task.detalle %></textarea
+    >
+    <br />
+    <input type="date" name="fecha" value="<%= task.fecha %>" />
+    <br /><br />
+    <button type="submit">Modificar Tarea</button>
+  </form>
+
+  <% } %>
+</div>
+
+<!-- Aquí va el footer.ejs-->
+<%- include("footer.ejs") %>

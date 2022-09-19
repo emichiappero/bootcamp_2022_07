@@ -1,0 +1,36 @@
+
+
+Productos  <---- Nombre de la Colección
+
+{
+  nombre: "Celular",
+  marca: "Apple",
+  referencia: "7 plus",
+  estado: "nuevo",
+  especificaciones: {
+    color: "negro",
+    dimensiones: {
+      alto: "15 cm",
+      ancho: "5 cm"
+    },
+    procesador: "M1",
+    bateria: "5000 mA",
+    camara: "12 MPx",
+    pantalla: {
+      tipo: "retina",
+      pulgadas: 12
+    },
+  },
+  precio: 800
+}
+
+{
+  nombre: "Laptop",
+  marca: "HP",
+  modelo: "Pavillion X2",
+  precio: 1400,
+  color: "amarillo",
+  usado: true,
+  so: [ "Windows", "Linux" ]
+}
+

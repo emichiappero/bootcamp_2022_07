@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX</title>
+  </head>
+  <body>
+    <h1>Utilizando AJAX</h1>
+
+    <form id="mi_formulario">
+      <input type="text" placeholder="Ingrese su nombre" name="nombre" />
+      <input type="text" name="apellido" />
+      <select name="color">
+        <option value="rojo">Rojo</option>
+        <option value="azul">Azul</option>
+        <option value="3">Verde</option>
+      </select>
+      <button id="boton">Enviar</button>
+    </form>
+
+    <h3>Listado de Usuarios</h3>
+    <ul id="listado"></ul>
+
+
+    <table>
+      
+        <th>
+          <td>A</td>
+          <td>B</td>
+          <td>C</td>
+        </th>
+        
+        <tr>
+          <td>Col1</td>
+          <td>Col2</td>
+          <td>Col3</td>
+        </tr>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        //Creamos un evento 'Click' sobre el boton con id 'boton'
+        $("#boton").click(function (e) {
+          e.preventDefault(); //Prevenir el comportamiento por defecto del boton
+
+          var datos_form = $("#mi_formulario").serialize(); //obtengo todos los datos de mi formulario (JSON)
+
+          //AJAX
+          $.ajax({
+            url: "/usuario",
+            type: "POST",
+            data: datos_form,
+            success: function (respuesta) {
+              console.log(respuesta);
+              $("#listado").append("<li>" + respuesta.nombre + "</li>");
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

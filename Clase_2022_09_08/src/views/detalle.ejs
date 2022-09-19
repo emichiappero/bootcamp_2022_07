@@ -1,0 +1,78 @@
+<%- include('_header.ejs') %> <%- include('_navbar.ejs') %>
+
+<div class="container">
+  <h1 class="mt-5 mb-3">Detalle del producto #<%= producto._id %></h1>
+
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-6">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          
+          <div class="carousel-inner">
+            <% for(var i = 0; i<producto.carrusel.length; i++){ %>
+            <div class="carousel-item <%= (i == 0)?'active':'' %>">
+              <img src="../../<%= producto.carrusel[i] %>" class="d-block w-100" alt="...">
+            </div>
+            <% } %>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <p class="card-text">
+            <span class="badge bg-info text-dark"
+              ><%= producto.categoria %></span
+            >
+          </p>
+          <h2 class="card-title"><%= producto.nombre %></h2>
+          <p class="card-text"><%= producto.descripcion %></p>
+          <h3 class="card-text">$<%= producto.precio %></h3>
+
+          <!-- Boton compar -->
+          <form action="/comprar" method="POST">
+            <input
+              type="hidden"
+              name="id_producto"
+              value="<%= producto._id %>"
+            />
+            <input
+              type="hidden"
+              name="nombre_producto"
+              value="<%= producto.nombre %>"
+            />
+            <input
+              type="hidden"
+              name="precio_unitario"
+              value="<%= producto.precio %>"
+            />
+            <div class="row">
+              <div class="col">
+                <input
+                  type="number"
+                  class="form-control"
+                  min="1"
+                  max="<%= producto.stock %>"
+                  value="1"
+                  name="cantidad"
+                />
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-success">Comprar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('_footer.ejs') %>

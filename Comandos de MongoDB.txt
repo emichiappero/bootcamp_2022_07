@@ -1,0 +1,77 @@
+## Comandos de MongoDB
+
+BASE DE DATOS:
+
+- use nombre_bd ---> Si existe nombre_bd, me posiciona adentro, SINO existe la crea y me posiciona adentro
+
+- show dbs ---> muestra todas las bases de datos
+
+- db ---> me muestra la base de datos ACTUAL
+
+- db.dropDatabase() ---> Elimina una base datos, la actual que estoy posicionado
+
+- db.stats() ---> Muestra estadísticas de las base de datos
+
+COLECCIONES:
+
+- db.createCollection("miColeccion") ---> Crea una colección llamada miColeccion
+- db.miColecccion.drop() ---> Elimina la colección llamada miColeccion
+
+DOCUMENTOS:
+
+INSERT:
+
+- db.miColeccion.insertOne({ nombre: "Emiliano", edad: 33 }) ---> Inserta 1 documento
+- db.miColeccion.insertMany([ {}, {}, {} ]) ---> Inserta múltiples documentos
+
+DELETE:
+
+- db.miColeccion.deleteOne({ edad: { $eq: 33 } }) ---> Elimina un documento según una condición
+- db.miColeccion.deleteMany({ condicion }) ---> Elimina múltiples documentos según coincidan con la condición
+
+UPDATE:
+
+- db.miColeccion.updateOne({ nombre: "Emiliano" }, { $set: { nombre: "Pablo" } }) ---> Actualizo 1 documento que coincide con la condición de búsqueda (nombre = Emiliano), y le cambio el nombre por Pablo
+- db.miColeccion.updateMany({ condicion }, { $set: { email: "yo@yo.com" } }) ---> Actualiza todos los documentos que coincidan con la condición de búsqueda, y le modifica el email en caso de existir, sino existe el email, lo agrega
+
+FIND:
+
+- db.miColeccion.find({ condicion_busqueda }) ---> Busca todos los documentos que coincidan con mi condición de búsqueda
+
+- db.miColeccion.find({ condicion_busqueda }, { nombre: 1, \_id: 0 }) ---> Busca todos los elementos que coincidan con mi condición de búsqueda y muestra sólo el campo nombre
+
+- db.miColeccion.find().sort({ nombre: -1 }) ---> Busco todos los documentos y los ordeno por nombre de forma descendente (Z-A)
+
+- db.miColeccion.find().limit(3) ---> BUsca todos los documentos y me muestra sólo los 3 primeros
+
+- db.miColeccion.find().limit(3).skip(2) ---> Busca todos los documentos y me muestra 3 documentos, pero salteando los 2 primeros
+
+Ejemplos:
+
+- db.miColeccion.find({}, { edad: 1 }).sort(email: -1, nombre: 1).limit(3).skip(1)
+- db.miColeccion.find({ $or: [ {nombre: "Laura" }, { edad: { $lt: 20 } } ] }).sort(edad: 1).skip(2)
+
+Operadores
+
+- $gt ---> Mayor que
+- $gte ---> Mayor o igual que
+- $lt ---> Menor que
+- $lte ---> Menor o igual que
+- $eq ---> Igual que
+- $ne ---> Distinto que
+- $and ---> Operador lógico AND (y)
+- $or ---> Operador lógico OR (o)
+- $exists ---> si existe o no un dato/campo
+- $regex ---> Busca una expresión regular
+
+Varios:
+
+- A a Z = 1 a 100000 = de Menor a Mayor = Ascendente
+- Z a A = 100000 a 1 = de Mayor a Menor = Descendente
+- { nombre: { $regex: /mil/ } } ---> Busca la palabra "mil" dentro del campo nombre
+- { nombre: { $regex: /mil$/ } } ---> Busca la palabra "mil" al final del campo nombre
+- { nombre: { $regex: /^mil/ } } ---> Busca la palabra "mil" al comienzo del campo nombre
+- { nombre: { $regex: /mil/i } } ---> Busca la palabra "mil" dentro del campo nombre, sin importar si es en mayúscula o minúscula
+- { colores: { $in: [ "rojo", "azul" ] } } ---> Busca los documentos que en el campo colores (array) tengan los valores rojo o azul
+- { pasaporte: { $exists: true } } ---> Busca los documentos en donde el campo pasaporte EXISTA
+- cls ---> Borra la pantalla (clear screen)

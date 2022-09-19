@@ -1,0 +1,11 @@
+.contenedor {
+  display: flex;
+  flex-direction: row;
+}
+
+.item {
+  width: 100%;
+  text-align: center;
+  border: 0.1em solid red;
+  margin-right: 5px;
+}

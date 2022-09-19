@@ -1,0 +1,18 @@
+<%- include('cabecera.ejs') %>
+
+<h1>Nueva Tarea</h1>
+
+<form action="/nuevaTarea" method="POST">
+  <input type="text" name="titulo" placeholder="Ingrese el título" />
+  <br />
+  <textarea
+    name="detalle"
+    cols="30"
+    rows="10"
+    placeholder="Detalle de la tarea"
+  ></textarea>
+  <br />
+  <button type="submit">Guardar nueva tarea</button>
+</form>
+
+<%- include('footer.ejs') %>

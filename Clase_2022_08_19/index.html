@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejemplo de Node con Mongo</title>
+  </head>
+  <body>
+    <h3>Listado de Personas</h3>
+    <table id="miTabla" border="1"></table>
+
+    <hr />
+    <h3>Formulario para Insertar una Persona</h3>
+    <form id="form_insert">
+      <input type="text" name="nombre" placeholder="Ingrese el nombre" />
+      <br />
+      <input type="text" name="apellido" placeholder="Ingrese el apellido" />
+      <br />
+      <input type="number" name="edad" />
+      <br />
+      <select name="adulto">
+        <option value="true">Mayor de edad</option>
+        <option value="false">Menor de edad</option>
+      </select>
+      <br />
+      <button id="btn_insert">Insertar</button>
+    </form>
+
+    <hr />
+
+    <h3>Formulario para Modificar una Persona</h3>
+    <form id="form_update">
+      <input
+        type="text"
+        name="id"
+        id="dato_id"
+        placeholder="Ingrese el ID a modificar"
+      />
+      <br />
+      <input type="text" name="nombre" placeholder="Ingrese el nombre" />
+      <br />
+      <input type="text" name="apellido" placeholder="Ingrese el apellido" />
+      <br />
+      <input type="number" name="edad" />
+      <br />
+      <select name="adulto">
+        <option value="true">Mayor de edad</option>
+        <option value="false">Menor de edad</option>
+      </select>
+      <br />
+      <button id="btn_update">Actualizar</button>
+    </form>
+
+    <hr />
+    <h3>Formulario para Eliminar una Persona</h3>
+    <form id="form_delete">
+      <input
+        type="text"
+        id="identificador"
+        placeholder="Ingrese el ID a Eliminar"
+      />
+      <br />
+      <button id="btn_delete">Eliminar</button>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "/prueba",
+          method: "GET",
+          success: function (respuesta) {
+            $("#miTabla").append(respuesta);
+
+            $(".eliminar").click(function () {
+              $(this).closest("tr").remove(); //Eliminamos de la tabla HTML
+
+              var id_boton = $(this).attr("id");
+              //Peticion DELETE al servidor
+              $.ajax({
+                url: "/persona/" + id_boton,
+                method: "DELETE",
+                success: function (r) {
+                  console.log("Respuesta de eliminar el documento" + r);
+                },
+              });
+            });
+          },
+        });
+
+        //Insertar
+        $("#btn_insert").click(function (e) {
+          e.preventDefault();
+          var datos = $("#form_insert").serialize();
+          $.ajax({
+            url: "/persona",
+            method: "POST",
+            data: datos,
+            success: function (respuesta) {
+              //console.log(respuesta);
+            },
+          });
+        });
+
+        //Actualizar
+        $("#btn_update").click(function (e) {
+          e.preventDefault();
+          var datos_modificar = $("#form_update").serialize();
+          var param_id = $("#dato_id").val();
+
+          $.ajax({
+            url: "/persona/" + param_id, // /persona/1234
+            method: "PUT",
+            data: datos_modificar,
+            success: function (respuesta) {
+              console.log(respuesta);
+            },
+          });
+        });
+
+        //Eliminar
+        $("#btn_delete").click(function (e) {
+          e.preventDefault();
+          var dato_eliminar = $("#identificador").val();
+
+          $.ajax({
+            url: "/persona/" + dato_eliminar,
+            method: "DELETE",
+            success: function (respuesta) {
+              console.log(respuesta);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+<!-- 
+CRUD
+
+C = Create = Insertar = Insert = POST
+R = Read = Obtener/Listar/Leer = Find = GET
+U = Update = Modificar/Editar = Update = PUT
+D = Delete = Eliminar = Delete = DELETE -->
