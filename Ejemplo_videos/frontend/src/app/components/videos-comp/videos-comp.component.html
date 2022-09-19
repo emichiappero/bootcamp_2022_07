@@ -1,0 +1,61 @@
+<h3>Listado de Videos</h3>
+
+<table border="1">
+  <thead>
+    <th>Título</th>
+    <th>URL</th>
+    <th>Fuente</th>
+    <th>Categoría</th>
+    <th>...</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let v of videoServ.documentos">
+      <td>{{ v.nombre }}</td>
+      <td>{{ v.url_video }}</td>
+      <td>{{ v.fuente }}</td>
+      <td>{{ v.categoria }}</td>
+      <td>
+        <button (click)="eliminarVideo(v._id)">Eliminar</button>
+        <button (click)="modificarVideo(v)">Modificar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3>Insertar nuevo video</h3>
+
+<form #miFormulario="ngForm" (ngSubmit)="agregarVideo(miFormulario)">
+  <input type="hidden" name="_id" [(ngModel)]="videoServ.datosForm._id" />
+  <input
+    type="text"
+    name="nombre"
+    placeholder="Título"
+    [(ngModel)]="videoServ.datosForm.nombre"
+  />
+  <br />
+  <input
+    type="text"
+    name="url_video"
+    placeholder="URL del video"
+    [(ngModel)]="videoServ.datosForm.url_video"
+  />
+  <br />
+  <input
+    type="text"
+    name="fuente"
+    placeholder="Youtube, Vimeo, TikTok, etc"
+    [(ngModel)]="videoServ.datosForm.fuente"
+  />
+  <br />
+  <input
+    type="text"
+    name="categoria"
+    placeholder="Categoría del video"
+    [(ngModel)]="videoServ.datosForm.categoria"
+  />
+  <br /><br />
+  <button type="submit">Guardar</button>
+  <button type="button">Limpiar formulario</button>
+</form>
